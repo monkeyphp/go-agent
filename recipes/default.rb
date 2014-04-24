@@ -20,11 +20,10 @@ package "unzip" do
 end
 
 remote_file "#{Chef::Config[:file_cache_path]}/go-agent.deb" do
-    source "http://download01.thoughtworks.com/go/13.4.1/ga/go-agent-13.4.1-18342.deb"
+    source "http://download01.thoughtworks.com/go/14.1.0/ga/go-agent-14.1.0-18882.deb"
 end
 
-package "go-server" do
-    source "#{Chef::Config[:file_cache_path]}/go-agent.deb"
-    provider Chef::Provider::Package::Dpkg
-    action :install
+execute "install_go-agent" do
+    command "sudo dpkg -i #{Chef::Config[:file_cache_path]}/go-agent.deb" 
+    action :run
 end
