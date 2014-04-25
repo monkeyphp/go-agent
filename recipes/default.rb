@@ -23,7 +23,7 @@ remote_file "#{Chef::Config[:file_cache_path]}/go-agent.deb" do
     source "http://download01.thoughtworks.com/go/14.1.0/ga/go-agent-14.1.0-18882.deb"
 end
 
-service "go-server" do
+service "go-agent" do
     supports :start => true, :stop => true, :restart => true, :status => true
     action :nothing
 end
