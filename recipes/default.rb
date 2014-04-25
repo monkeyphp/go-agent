@@ -23,7 +23,14 @@ remote_file "#{Chef::Config[:file_cache_path]}/go-agent.deb" do
     source "http://download01.thoughtworks.com/go/14.1.0/ga/go-agent-14.1.0-18882.deb"
 end
 
+service "go-server" do
+    supports :start => true, :stop => true, :restart => true, :status => true
+    action :nothing
+end
+
 execute "install_go-agent" do
     command "sudo dpkg -i #{Chef::Config[:file_cache_path]}/go-agent.deb" 
     action :run
+    notifies :start, resources(:service => "go-agent")
 end
+
